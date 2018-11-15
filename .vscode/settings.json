@@ -1,0 +1,9 @@
+{
+    "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+    "C_Cpp.configurationWarnings": "Disabled",
+    "files.associations": {
+        "*.c++": "cpp",
+        "lib_timer.h": "c",
+        "lib_convention__errno.h": "c"
+    }
+}

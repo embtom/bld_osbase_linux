@@ -1,0 +1,18 @@
+[submodule "lib_timer"]
+	path = lib_timer
+	url = https://github.com/tom3333/lib_timer.git
+[submodule "lib_thread"]
+	path = lib_thread
+	url = https://github.com/tom3333/lib_thread.git
+[submodule "lib_clock"]
+	path = lib_clock
+	url = https://github.com/tom3333/lib_clock.git
+[submodule "lib_mini_printf"]
+	path = lib_mini_printf
+	url = https://github.com/tom3333/mini-printf.git
+[submodule "lib_convention"]
+	path = lib_convention
+	url = https://github.com/tom3333/lib_convention.git
+[submodule "lib_list"]
+	path = lib_list
+	url = https://github.com/tom3333/lib_list.git

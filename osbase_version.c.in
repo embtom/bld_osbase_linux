@@ -1,0 +1,46 @@
+/* ****************************************************************************************************
+ * version.c get osbase verion information
+ *
+ *  compiler:   GNU Tools ARM LINUX
+ *  target:     armv6
+ *  author:	    Tom
+ * ****************************************************************************************************/
+
+/* ****************************************************************************************************/
+
+/*
+ *	******************************* change log *******************************
+ *  date			user			comment
+ * 	23 Oktober 2018			Tom			- creation of osbase_version.c
+ *
+ */
+
+/* *******************************************************************
+ * includes
+ * ******************************************************************/
+
+/* project */
+#include "osbase_version.h"
+
+/* *******************************************************************
+ * defines
+ * ******************************************************************/
+
+#define GIT_SHA1 "@GIT_SHA1@";
+#define GIT_DATE "@GIT_DATE@";
+#define GIT_COMMIT_SUBJECT "@GIT_COMMIT_SUBJECT@";
+
+char* get_osbase__git_sha1(void)
+{
+    return GIT_SHA1;
+}
+
+char* get_osbase__git_date(void)
+{
+    return GIT_SHA1;
+}
+
+char* get_osbase__git_commit_subject(void)
+{
+    return GIT_COMMIT_SUBJECT;
+}
