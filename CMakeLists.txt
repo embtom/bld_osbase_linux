@@ -1,9 +1,10 @@
 project(osbase)
 cmake_minimum_required(VERSION 2.8)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(Threads REQUIRED)
 find_package(iotty REQUIRED)
-find_library(LIBRT rt)
+find_package(LibRt REQUIRED)
 
 set(CMAKE_DEBUG_POSTFIX _g)
 
@@ -62,7 +63,7 @@ add_subdirectory(lib_timer)
 #Get interface headers of the sublibraries
 ######################################################
 get_property(HEADERS_LIB_CLOCK TARGET lib_clock PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-get_property(HEADERS_LIB_CONVENTION TARGET itf_lib_convention PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+get_property(HEADERS_LIB_CONVENTION TARGET lib_convention PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
 get_property(HEADERS_LIB_LIST TARGET lib_list PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
 get_property(COMPILE_DEF_LIB_LIST TARGET lib_list PROPERTY COMPILE_DEFINITIONS)
 get_property(HEADERS_LIB_MINI_PRINTF TARGET lib_mini_printf PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
@@ -81,8 +82,8 @@ ENDFOREACH(item ${HEADERS_OS_BASE_SUB_LIBS})
 #Build target settings
 ######################################################
 add_library(${PROJECT_NAME} SHARED ${CMAKE_CURRENT_BINARY_DIR}/osbase_version.c ) # $<TARGET_OBJECTS:lib_thread> 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT} ${LIBRT} EMBTOM::iotty)
-target_link_libraries(${PROJECT_NAME} PRIVATE itf_lib_convention  
+target_link_libraries(${PROJECT_NAME} PUBLIC Threads::Threads LIBRT::LIBRT EMBTOM::iotty)
+target_link_libraries(${PROJECT_NAME} PRIVATE lib_convention  
       "-Wl,--whole-archive" lib_list lib_clock lib_thread lib_timer lib_mini_printf "-Wl,--no-whole-archive")
 target_include_directories(${PROJECT_NAME} PRIVATE ./)
 target_include_directories(${PROJECT_NAME} PUBLIC  $<INSTALL_INTERFACE:include/embtom/osbase> )
@@ -96,11 +97,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${MY_PUBLIC_HEAD
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
     EXPORT osbase-targets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/embtom
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/embtom
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/embtom/osbase
 )
-install(FILES osbaseConfig.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/osbase)
+install(FILES cmake/osbaseConfig.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/osbase)
+install(FILES cmake/FindLibRt.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/osbase/cmake)
+
 
 install(EXPORT osbase-targets
   FILE
@@ -115,7 +118,7 @@ install(EXPORT osbase-targets
 #CPack
 ######################################################
 set(CPACK_GENERATOR "DEB")
-SET(CPACK_PACKAGE_NAME "embtom-osbase")
+set(CPACK_PACKAGE_NAME "embtom-osbase-${CMAKE_BUILD_TYPE}")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "1")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
