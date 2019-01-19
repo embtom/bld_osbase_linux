@@ -56,8 +56,8 @@ add_subdirectory(lib_convention)
 add_subdirectory(lib_list)
 add_subdirectory(lib_clock)
 add_subdirectory(lib_mini_printf)
-add_subdirectory(lib_thread)
 add_subdirectory(lib_timer)
+add_subdirectory(lib_thread)
     
 ######################################################
 #Get interface headers of the sublibraries
@@ -126,6 +126,5 @@ set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 set(CPACK_PACKAGE_DESCRIPTION "EMBTOM::osbase")
 set(CPACK_PACKAGE_CONTACT "Thomas Willetal t.willetal@googlemail.com")
 set(CPACK_PACKAGING_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
-#set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_CURRENT_SOURCE_DIR}/Debian/postinst")
-
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GIT_SHA1: ${GIT_SHA1}")                                      
 include(CPack)
