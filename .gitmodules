@@ -1,18 +1,24 @@
 [submodule "lib_timer"]
 	path = lib_timer
-	url = https://github.com/tom3333/lib_timer.git
+	url = https://github.com/embtom/lib_timer.git
+	branch = master
 [submodule "lib_thread"]
 	path = lib_thread
-	url = https://github.com/tom3333/lib_thread.git
+	url = https://github.com/embtom/lib_thread.git
+	branch = master
 [submodule "lib_clock"]
 	path = lib_clock
-	url = https://github.com/tom3333/lib_clock.git
+	url = https://github.com/embtom/lib_clock.git
+	branch = master
 [submodule "lib_mini_printf"]
 	path = lib_mini_printf
-	url = https://github.com/tom3333/mini-printf.git
+	url = https://github.com/embtom/mini-printf.git
+	branch = master
 [submodule "lib_convention"]
 	path = lib_convention
-	url = https://github.com/tom3333/lib_convention.git
+	url = https://github.com/embtom/lib_convention.git
+	branch = master
 [submodule "lib_list"]
 	path = lib_list
-	url = https://github.com/tom3333/lib_list.git
+	url = https://github.com/embtom/lib_list.git
+	branch = master
