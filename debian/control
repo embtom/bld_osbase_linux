@@ -1,0 +1,29 @@
+Source: osbase
+Section: comm
+Priority: optional
+Maintainer: Thomas Willetal <t.willetal@gmail.com>
+Build-Depends: cmake, debhelper (>= 11), gcc (>= 4.7), streamrouter-dev
+Standards-Version: 4.3.0
+
+Package: osbase
+Architecture: any
+Section: libs
+Depends: streamrouter, ${shlibs:Depends}, ${misc:Depends}
+Description: embtom osbase
+
+Package: osbase-dev
+Architecture: any
+Section: libdevel
+Depends: osbase,
+         ${misc:Depends}
+Description: embtom osbase [development]
+
+Package: osbase-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends:
+    osbase (= ${binary:Version}),
+    ${misc:Depends}
+Description: debugging symbols for osbase
+ This package contains the debugging symbols for osbase.

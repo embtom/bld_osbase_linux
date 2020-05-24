@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "pbuilder_debmirror_tomhp",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/210_pbuilder_debmirror_tomhp.sh",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "pbuilder_build_osbase",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/300_pbuilder_build_osbase.sh",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "osbaseTest_g",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/Debug/test/osbaseTest_g",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}

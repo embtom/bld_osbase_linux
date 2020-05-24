@@ -1,9 +1,24 @@
-{
-    "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-    "C_Cpp.configurationWarnings": "Disabled",
-    "files.associations": {
-        "*.c++": "cpp",
-        "lib_timer.h": "c",
-        "lib_convention__errno.h": "c"
-    }
+{  
+    "window.zoomLevel": 0.5,
+    "editor.fontSize": 12,   
+    "cmake.buildDirectory": "${workspaceRoot}/build/${buildKit}_${buildType}",
+    "cmakeExplorer.buildDir": "build/GCC for x86_64-linux-gnu 7.5.0_${buildType}",
+    //"cmake.generator": "Unix Makefiles",
+    "cmake.configureArgs": [
+        "-DLIB_LIST_LOCK=lock_cas",
+        "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
+        "-DOSBASE_BUILD_TEST=ON"
+    ],
+    "C_Cpp.default.includePath": [
+        "${default}",
+        "/usr/include/embtom/streamRouter/",
+        "${workspaceRoot}/c/lib_thread/include",
+        "${workspaceRoot}/c/lib_timer/include",
+        "${workspaceRoot}/c/lib_clock/include",
+        "${workspaceRoot}/c/lib_list/include",
+        "${workspaceRoot}/c/lib_convention/include",
+        "${workspaceRoot}/test/lib_test_framework_EMBUNIT",
+        "${workspaceRoot}/test/lib_test_cases/include",
+        "${workspaceRoot}/build/${buildKit}_${buildType}/test/lib_test_cases/test_lib_thread"
+    ]
 }

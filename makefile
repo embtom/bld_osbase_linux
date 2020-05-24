@@ -1,7 +1,7 @@
 #
 # This file is part of the EMBTOM project
-# Copyright (c) 2018-2019 Thomas Willetal 
-# (https://github.com/tom3333)
+# Copyright (c) 2018-2020 Thomas Willetal 
+# (https://github.com/embtom)
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -54,7 +54,7 @@ release_distclean:
 
 $(build_release_make):
 	mkdir -p $(@D)
-	cd $(@D) && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../..
+	cd $(@D) && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLIB_LIST_LOCK=lock_cas ../..
 
 #############################################################
 # Sub build targets (Debug)
@@ -71,18 +71,18 @@ debug_distclean:
 	
 $(build_debug_make):
 	mkdir -p $(@D)
-	cd $(@D) && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../..
+	cd $(@D) && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DLIB_LIST_LOCK=lock_cas ../..
 
 #############################################################
 # Packet install targets 
 #############################################################
 install_release:
-	dpkg -r embtom-osbase-release > /dev/null
-	dpkg -r embtom-osbase-debug > /dev/null
+	dpkg -r osBase-release > /dev/null
+	dpkg -r osBase-debug > /dev/null
 	dpkg -i $(releasePacket)
 
 install_debug:
-	dpkg -r embtom-osbase-release > /dev/null
-	dpkg -r embtom-osbase-debug > /dev/null
+	dpkg -r osBase-release > /dev/null
+	dpkg -r osBase-debug > /dev/null
 	dpkg -i $(debugPacket)
 		

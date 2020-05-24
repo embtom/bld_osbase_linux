@@ -1,0 +1,61 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SSL_NO_VERIFY: "true"
+
+stages:
+  - build
+  - deploy
+  - enable_merge
+
+build_job:
+  stage: build
+  tags:
+    - tomhp
+  script:
+    - ./scripts/210_pbuilder_debmirror_tomhp.sh
+    - ./scripts/300_pbuilder_build_osbase.sh
+  artifacts:
+    paths:
+      - ./build_deb/
+    expire_in: 4 week
+  only:
+    - master
+
+deploy_job:
+  stage: deploy
+  tags:
+    - tomhp
+  script:
+    - cd ./build_deb
+    - cp * /media/volume1/ci_projects/snapshot/osbase
+    - reprepro -b /media/volume1/reprepo/ -A amd64 remove bionic osbase-dev
+    - reprepro -b /media/volume1/reprepo/ -A amd64 remove bionic osbase-dbg
+    - reprepro -b /media/volume1/reprepo/ -A amd64 remove bionic osbase
+    - reprepro -b /media/volume1/reprepo/ -A source remove bionic osbase
+    - reprepro --ignore=wrongdistribution -b /media/volume1/reprepo/ -V include bionic osbase*_amd64.changes
+    - cd ..
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git remote set-url origin ssh://git@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git
+    - ./scripts/400_create_tag.sh
+  when: on_success
+  only:
+    - master
+
+enable_merge:
+  stage: enable_merge
+  tags:
+    - tomhp
+  script:
+    - ./scripts/210_pbuilder_debmirror_tomhp.sh
+    - ./scripts/300_pbuilder_build_osbase.sh
+  artifacts:
+    paths:
+      - ./build_deb/
+    expire_in: 1 days
+  only:
+    - merge_requests
+
+
+
+
